@@ -1,0 +1,19 @@
+de:
+  WWN\Appointments\AppointmentsAdmin:
+    MENUTITLE: 'Appointments'
+
+  WWN\Appointments\Appointment:
+    DateFormatted: 'Date'
+    db_Date: 'Date'
+    db_Unity: 'Unity'
+    db_Subject: 'Subject'
+    db_Location: 'Location'
+    db_Leadership: 'Leadership'
+    db_Clothing: 'Clothing'
+    PLURALNAME: 'Appointments'
+    SINGULARNAME: 'Appointment'
+    DateTimeFormat: 'm/d/Y H:m'
+    DateTimeDateDescription: 'Datetime in the following form {format}'
+
+  WWN\Appointments\AppointmentsPage:
+    SINGULARNAME: 'Appointment site'

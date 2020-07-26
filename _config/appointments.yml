@@ -1,0 +1,7 @@
+PageController:
+  extensions:
+    - WWN\Appointments\Extensions\PageControllerExtension
+
+WWN\Vehicles\Vehicle:
+  extensions:
+    - WWN\Appointments\Extensions\VehicleExtension
