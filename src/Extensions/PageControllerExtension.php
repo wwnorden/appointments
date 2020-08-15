@@ -24,6 +24,6 @@ class PageControllerExtension extends Extension
         return DataObject::get(Appointment::class)
             ->where("Date >= NOW()")
             ->sort('Date ASC')
-            ->first();
+            ->limit($limit);
     }
 }
