@@ -24,3 +24,6 @@ de:
 
   WWN\Appointments\AppointmentsPage:
     SINGULARNAME: 'Terminseite'
+
+  WWN\Vehicles\Vehicle:
+    belongs_many_many_Appointment: 'Termine'
