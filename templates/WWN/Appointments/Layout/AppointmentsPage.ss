@@ -23,6 +23,13 @@
                             <td>$Location</td>
                             <td>$Leadership</td>
                             <td>$Clothing</td>
+                            <% if $Vehicles %>
+                                <td>
+                                    <% loop $Vehicles() %>
+                                        $Name<% if not $Last %>, <% end_if %>
+                                    <% end_loop %>
+                                </td>
+                            <% end_if %>
                         </tr>
                     <% end_loop %>
                 </tbody>
