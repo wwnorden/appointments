@@ -29,6 +29,8 @@
                                         $Name<% if not $Last %>, <% end_if %>
                                     <% end_loop %>
                                 </td>
+                            <% else %>
+                                <td>$CustomVehicleInfo</td>
                             <% end_if %>
                         </tr>
                     <% end_loop %>
