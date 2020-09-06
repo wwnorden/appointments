@@ -30,7 +30,7 @@
                                     <% end_loop %>
                                 </td>
                             <% else %>
-                                <td>$CustomVehicleInfo</td>
+                                <td>$CustomVehicleInfoTranslation($CustomVehicleInfo)</td>
                             <% end_if %>
                         </tr>
                     <% end_loop %>

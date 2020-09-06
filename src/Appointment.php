@@ -114,6 +114,7 @@ class Appointment extends DataObject
     {
         parent::populateDefaults();
         $this->Date = date('d.m.Y h:m');
+        $this->CustomVehicleInfo = null;
     }
 
     /**
@@ -285,5 +286,15 @@ class Appointment extends DataObject
         }
 
         return $translatedField;
+    }
+
+    public function CustomVehicleInfoTranslation($CustomVehicleInfo)
+    {
+        if (empty($CustomVehicleInfo)) {
+            return '';
+        } else {
+            return _t('WWN\Appointments\Appointment.'.$CustomVehicleInfo,
+                $CustomVehicleInfo);
+        }
     }
 }
