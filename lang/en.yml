@@ -18,6 +18,7 @@ de:
     DateTimeDateDescription: 'Datetime in the following form {format}'
     Groupvehicles: 'Groupvehicles'
     Upon need: 'Upon need'
+    many_many_Vehicles: 'Vehicles'
 
   WWN\Appointments\AppointmentsPage:
     SINGULARNAME: 'Appointment site'
