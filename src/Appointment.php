@@ -4,6 +4,7 @@ namespace WWN\Appointments;
 
 use DateTime;
 use SilverStripe\Forms\DatetimeField;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
@@ -31,6 +32,7 @@ class Appointment extends DataObject
         'Location' => 'Varchar(100)',
         'Leadership' => 'Varchar(100)',
         'Clothing' => 'Varchar(100)',
+        'CustomVehicleInfo' => "Enum('Groupvehicles,Upon need')",
     ];
 
     /**
@@ -205,11 +207,30 @@ class Appointment extends DataObject
     {
         $fields = parent::getCMSFields();
 
+        $mainOptions = array(
+            'CustomVehicleInfo' => $this->translateEnum(
+                __CLASS__,
+                'CustomVehicleInfo'
+            ),
+        );
+
         // Main tab
         $mainFields = [
             'Date' => $this->configDatetime('Date'),
+            'CustomVehicleInfo' => DropdownField::create(
+                'CustomVehicleInfo',
+                _t('WWN\Appointments\Appointment.db_CustomVehicleInfo',
+                    'CustomVehicleInfo'),
+                $mainOptions['CustomVehicleInfo']
+            ),
         ];
         $fields->addFieldsToTab('Root.Main', $mainFields);
+
+        $fields->dataFields()['CustomVehicleInfo']->setDescription(
+            _t('WWN\Appointments\Appointment.CustomVehicleInfoDescription',
+                'Select if no vehicles are choosen')
+        );
+        $fields->dataFields()['CustomVehicleInfo']->setHasEmptyDefault(true);
 
         return $fields;
     }
@@ -245,5 +266,24 @@ class Appointment extends DataObject
         );
 
         return $dateTimefield;
+    }
+
+    /**
+     * @param string $class
+     * @param string $field
+     *
+     * @return array
+     */
+    public function translateEnum($class, $field): array
+    {
+        $enumArr = $this->dbObject($field)->enumValues();
+
+        // Enum Übersetzungen
+        $translatedField = [];
+        foreach ($enumArr as $key => $value) {
+            $translatedField[$key] = _t($class.'.'.$key, $class.'.'.$key);
+        }
+
+        return $translatedField;
     }
 }

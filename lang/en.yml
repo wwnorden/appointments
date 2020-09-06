@@ -10,10 +10,14 @@ de:
     db_Location: 'Location'
     db_Leadership: 'Leadership'
     db_Clothing: 'Clothing'
+    db_CustomVehicleInfo: 'Additional vehicle informations'
     PLURALNAME: 'Appointments'
     SINGULARNAME: 'Appointment'
+    CustomVehicleInfoDescription: 'Select if no vehicles are choosen'
     DateTimeFormat: 'm/d/Y H:m'
     DateTimeDateDescription: 'Datetime in the following form {format}'
+    Groupvehicles: 'Groupvehicles'
+    Upon need: 'Upon need'
 
   WWN\Appointments\AppointmentsPage:
     SINGULARNAME: 'Appointment site'
