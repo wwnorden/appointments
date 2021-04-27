@@ -2,18 +2,15 @@
 
 namespace WWN\Appointments;
 
-use DateTime;
-use SilverStripe\Forms\DatetimeField;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
-use WWN\Vehicles\Vehicle;
+use SilverStripe\ORM\ManyManyList;
 
 /**
  * AppointmentList
  *
  * @package wwn-appointments
+ * @property string $Title
+ * @method ManyManyList Appointments()
  */
 class AppointmentList extends DataObject
 {

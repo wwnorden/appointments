@@ -8,12 +8,22 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\ManyManyList;
 use WWN\Vehicles\Vehicle;
 
 /**
  * Appointment
  *
  * @package wwn-appointments
+ * @property string $Date
+ * @property string $Unity
+ * @property string $Subject
+ * @property string $Location
+ * @property string $Leadership
+ * @property string $Clothing
+ * @property string $CustomVehicleInfo
+ * @method ManyManyList Vehicles()
+ * @method ManyManyList Lists()
  */
 class Appointment extends DataObject
 {
@@ -40,6 +50,7 @@ class Appointment extends DataObject
      */
     private static $many_many = [
         'Vehicles' => Vehicle::class,
+        'Lists' => AppointmentList::class,
     ];
 
     /**
@@ -208,12 +219,12 @@ class Appointment extends DataObject
     {
         $fields = parent::getCMSFields();
 
-        $mainOptions = array(
+        $mainOptions = [
             'CustomVehicleInfo' => $this->translateEnum(
                 __CLASS__,
                 'CustomVehicleInfo'
             ),
-        );
+        ];
 
         // Main tab
         $mainFields = [
