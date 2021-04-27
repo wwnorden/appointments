@@ -30,6 +30,7 @@ class AppointmentsAdmin extends ModelAdmin
      * @var string[]
      */
     private static $managed_models = [
+        'WWN\Appointments\AppointmentList',
         'WWN\Appointments\Appointment',
     ];
 }
