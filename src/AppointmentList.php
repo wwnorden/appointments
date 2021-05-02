@@ -4,11 +4,15 @@ namespace WWN\Appointments;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\ManyManyList;
 
 /**
  * AppointmentList
  *
  * @package wwn-appointments
+ * @property string $Title
+ * @method ManyManyList Appointments()
+ * @method ManyManyList Pages()
  */
 class AppointmentList extends DataObject
 {
