@@ -20,6 +20,12 @@ de:
     Upon need: 'Upon need'
     many_many_Vehicles: 'Vehicles'
 
+  WWN\Appointments\AppointmentList:
+    Title: 'Title'
+    belongs_many_many_Appointments: 'Appointments'
+    PLURALNAME: 'Lists'
+    SINGULARNAME: 'List'
+
   WWN\Appointments\AppointmentsPage:
     SINGULARNAME: 'Appointment site'
 

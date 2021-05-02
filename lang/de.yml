@@ -26,6 +26,13 @@ de:
     Groupvehicles: 'Gruppenfahrzeuge'
     Upon need: 'Nach Bedarf'
     many_many_Vehicles: 'Fahrzeuge'
+    many_many_Lists: 'Listen'
+
+  WWN\Appointments\AppointmentList:
+    Title: 'Titel'
+    belongs_many_many_Appointments: 'Termine'
+    PLURALNAME: 'Listen'
+    SINGULARNAME: 'Liste'
 
   WWN\Appointments\AppointmentsPage:
     SINGULARNAME: 'Terminseite'
