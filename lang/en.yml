@@ -21,7 +21,7 @@ de:
     many_many_Vehicles: 'Vehicles'
 
   WWN\Appointments\AppointmentList:
-    Title: 'Title'
+    db_Title: 'Title'
     belongs_many_many_Appointments: 'Appointments'
     belongs_many_many_Pages: 'Pages'
     PLURALNAME: 'Lists'
