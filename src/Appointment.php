@@ -67,8 +67,8 @@ class Appointment extends DataObject
      * @var string[]
      */
     private static array $default_sort = [
-        'Date' => 'DESC',
-        'ID' => 'DESC',
+        'Date' => 'ASC',
+        'ID' => 'ASC',
     ];
 
     /**
