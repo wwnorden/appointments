@@ -35,7 +35,7 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $db = [
+    private static array $db = [
         'Date' => 'DBDatetime',
         'Unity' => 'Varchar(100)',
         'Subject' => 'Varchar(300)',
@@ -48,7 +48,7 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $many_many = [
+    private static array $many_many = [
         'Vehicles' => Vehicle::class,
         'Lists' => AppointmentList::class,
     ];
@@ -56,7 +56,7 @@ class Appointment extends DataObject
     /**
      * @var array[]
      */
-    private static $indexes = [
+    private static array $indexes = [
         'SearchFields' => [
             'type' => 'fulltext',
             'columns' => ['Subject', 'Location'],
@@ -66,7 +66,7 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $default_sort = [
+    private static array $default_sort = [
         'Date' => 'DESC',
         'ID' => 'DESC',
     ];
@@ -74,13 +74,21 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $summary_fields = [
+    private static array $summary_fields = [
         'DateFormatted',
         'Unity',
         'Subject',
         'Location',
         'Leadership',
         'Clothing',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private static array $searchable_fields = [
+        'Subject',
+        'Location',
     ];
 
     /**
@@ -112,14 +120,6 @@ class Appointment extends DataObject
 
         return $this->replaceDay($date->format('l, d.m.Y H:i'));
     }
-
-    /**
-     * @var string[]
-     */
-    private static $searchable_fields = [
-        'Subject',
-        'Location',
-    ];
 
     public function populateDefaults()
     {
@@ -228,7 +228,7 @@ class Appointment extends DataObject
 
         // Main tab
         $mainFields = [
-            'Date' => $this->configDatetime('Date'),
+            'Date' => $this->configDatetime(),
             'CustomVehicleInfo' => DropdownField::create(
                 'CustomVehicleInfo',
                 _t('WWN\Appointments\Appointment.db_CustomVehicleInfo',
@@ -248,15 +248,14 @@ class Appointment extends DataObject
     }
 
     /**
-     * @param $field
      *
      * @return DatetimeField
      */
-    private function configDatetime($field): DatetimeField
+    private function configDatetime(): DatetimeField
     {
         $dateTimefield = DatetimeField::create(
-            $field,
-            _t('WWN\Appointments\Appointment.db_'.$field, $field)
+            'Date',
+            _t('WWN\Appointments\Appointment.db_'.'Date', 'Date')
         )
             ->setHTML5(false)
             ->setDateTimeFormat(
@@ -286,11 +285,11 @@ class Appointment extends DataObject
      *
      * @return array
      */
-    public function translateEnum($class, $field): array
+    public function translateEnum(string $class, string $field): array
     {
         $enumArr = $this->dbObject($field)->enumValues();
 
-        // Enum Übersetzungen
+        // Enum translations
         $translatedField = [];
         foreach ($enumArr as $key => $value) {
             $translatedField[$key] = _t($class.'.'.$key, $class.'.'.$key);
@@ -299,7 +298,12 @@ class Appointment extends DataObject
         return $translatedField;
     }
 
-    public function CustomVehicleInfoTranslation($CustomVehicleInfo)
+    /**
+     * @param $CustomVehicleInfo
+     *
+     * @return string
+     */
+    public function CustomVehicleInfoTranslation($CustomVehicleInfo): string
     {
         if (empty($CustomVehicleInfo)) {
             return '';
