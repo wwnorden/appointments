@@ -14,22 +14,23 @@ class AppointmentsAdmin extends ModelAdmin
     /**
      * @var string
      */
-    private static $menu_icon_class = 'font-icon-calendar';
+    private static string $menu_icon_class = 'font-icon-calendar';
 
     /**
      * @var string
      */
-    private static $menu_title = 'Termine';
+    private static string $menu_title = 'Termine';
 
     /**
      * @var string
      */
-    private static $url_segment = 'termine';
+    private static string $url_segment = 'termine';
 
     /**
      * @var string[]
      */
-    private static $managed_models = [
+    private static array $managed_models = [
+        'WWN\Appointments\AppointmentList',
         'WWN\Appointments\Appointment',
     ];
 }

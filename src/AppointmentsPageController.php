@@ -18,7 +18,7 @@ class AppointmentsPageController extends PageController
      *
      * @return DataList
      */
-    public function Appointments()
+    public function Appointments(): DataList
     {
         return DataObject::get(
             Appointment::class,

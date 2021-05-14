@@ -5,3 +5,7 @@ PageController:
 WWN\Vehicles\Vehicle:
   extensions:
     - WWN\Appointments\Extensions\VehicleExtension
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - WWN\Appointments\Extensions\AppointmentListPageExtension
