@@ -3,13 +3,10 @@
 namespace WWN\Appointments\Extensions;
 
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\ManyManyList;
@@ -28,21 +25,21 @@ class AppointmentListPageExtension extends DataExtension
     /**
      * @var string[]
      */
-    private static $db = [
+    private static array $db = [
         'EnableAppointmentListExtension' => 'Boolean',
     ];
 
     /**
      * @var string[]
      */
-    private static $many_many = [
+    private static array $many_many = [
         'AppointmentLists' => AppointmentList::class,
     ];
 
     /**
      * @var string[][]
      */
-    private static $many_many_extraFields = [
+    private static array $many_many_extraFields = [
         'AppointmentLists' => [
             'Sort' => 'Int',
         ],
@@ -51,7 +48,7 @@ class AppointmentListPageExtension extends DataExtension
     /**
      * @var false[]
      */
-    private static $defaults = [
+    private static array $defaults = [
         'EnableAppointmentListExtension' => false,
     ];
 
@@ -114,6 +111,6 @@ class AppointmentListPageExtension extends DataExtension
      */
     public function getSortedAppointmentLists()
     {
-        return $this->owner->AppointmentLists()->sort('Sort');
+        return $this->owner->AppointmentLists()->sort('Sort ASC');
     }
 }
