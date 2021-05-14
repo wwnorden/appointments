@@ -6,11 +6,20 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\ManyManyList;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 use WWN\Appointments\AppointmentList;
 
 /**
@@ -62,8 +71,18 @@ class AppointmentListPageExtension extends DataExtension
                 'AppointmentLists',
                 _t('WWN\Appointments\Extensions\AppointmentListPageExtension.many_many_AppointmentLists', 'Lists'),
                 $this->owner->AppointmentLists(),
-                GridFieldConfig_RecordEditor::create()
-                    ->addComponent(new GridFieldOrderableRows('Sort'))
+                GridFieldConfig::create()->addComponents(
+                    new GridFieldToolbarHeader(),
+                    new GridFieldAddNewButton('toolbar-header-right'),
+                    new GridFieldDetailForm(),
+                    new GridFieldDataColumns(),
+                    new GridFieldEditButton(),
+                    new GridFieldDeleteAction('unlinkrelation'),
+                    new GridFieldDeleteAction(),
+                    new GridFieldOrderableRows('Sort'),
+                    new GridFieldTitleHeader(),
+                    new GridFieldAddExistingAutocompleter('before', ['Title'])
+                )
             );
 
             $fields->findOrMakeTab('Root.AppointmentLists', _t(
