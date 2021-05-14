@@ -19,7 +19,7 @@ class PageControllerExtension extends Extension
      *
      * @return DataList
      */
-    public function GetNextAppointment($limit = 2)
+    public function GetNextAppointment(int $limit = 2): DataList
     {
         return DataObject::get(Appointment::class)
             ->where("Date >= NOW()")

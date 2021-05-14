@@ -30,7 +30,7 @@ class Appointment extends DataObject
     /**
      * @var string
      */
-    private static $table_name = 'WWNAppointments';
+    private static string $table_name = 'WWNAppointments';
 
     /**
      * @var string[]

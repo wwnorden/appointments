@@ -19,19 +19,19 @@ class AppointmentList extends DataObject
     /**
      * @var string
      */
-    private static $table_name = 'WWNAppointmentLists';
+    private static string $table_name = 'WWNAppointmentLists';
 
     /**
      * @var string[]
      */
-    private static $db = [
+    private static array $db = [
         'Title' => 'Varchar(255)',
     ];
 
     /**
      * @var string[]
      */
-    private static $belongs_many_many = [
+    private static array $belongs_many_many = [
         'Appointments' => Appointment::class,
         'Pages' => SiteTree::class,
     ];
