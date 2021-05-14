@@ -31,6 +31,7 @@ de:
   WWN\Appointments\AppointmentList:
     Title: 'Titel'
     belongs_many_many_Appointments: 'Termine'
+    belongs_many_many_Pages: 'Seiten'
     PLURALNAME: 'Listen'
     SINGULARNAME: 'Liste'
 

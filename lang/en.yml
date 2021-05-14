@@ -23,6 +23,7 @@ de:
   WWN\Appointments\AppointmentList:
     Title: 'Title'
     belongs_many_many_Appointments: 'Appointments'
+    belongs_many_many_Pages: 'Pages'
     PLURALNAME: 'Lists'
     SINGULARNAME: 'List'
 
