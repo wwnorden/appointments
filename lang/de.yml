@@ -26,9 +26,26 @@ de:
     Groupvehicles: 'Gruppenfahrzeuge'
     Upon need: 'Nach Bedarf'
     many_many_Vehicles: 'Fahrzeuge'
+    many_many_Lists: 'Listen'
+
+  WWN\Appointments\AppointmentList:
+    db_Title: 'Titel'
+    belongs_many_many_Appointments: 'Termine'
+    belongs_many_many_Pages: 'Seiten'
+    PLURALNAME: 'Terminlisten'
+    SINGULARNAME: 'Terminliste'
 
   WWN\Appointments\AppointmentsPage:
+    PLURALNAME: 'Terminseiten'
     SINGULARNAME: 'Terminseite'
 
-  WWN\Vehicles\Vehicle:
+  WWN\Appointments\Extensions\VehicleExtension:
     belongs_many_many_Appointment: 'Termine'
+    PLURALNAME: 'Termine'
+    SINGULARNAME: 'Termin'
+
+  WWN\Appointments\Extensions\AppointmentListPageExtension:
+    db_EnableAppointmentListExtension: 'Termin Listen auf Seiten aktivieren'
+    many_many_AppointmentLists: 'Terminlisten'
+    PLURALNAME: 'Terminlisten'
+    SINGULARNAME: 'Terminliste'

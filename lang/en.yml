@@ -20,8 +20,24 @@ de:
     Upon need: 'Upon need'
     many_many_Vehicles: 'Vehicles'
 
+  WWN\Appointments\AppointmentList:
+    db_Title: 'Title'
+    belongs_many_many_Appointments: 'Appointments'
+    belongs_many_many_Pages: 'Pages'
+    PLURALNAME: 'Lists'
+    SINGULARNAME: 'List'
+
   WWN\Appointments\AppointmentsPage:
+    PLURALNAME: 'Appointment sites'
     SINGULARNAME: 'Appointment site'
 
-  WWN\Vehicles\Vehicle:
+  WWN\Appointments\Extensions\VehicleExtension:
     belongs_many_many_Appointment: 'Appointments'
+    PLURALNAME: 'Appointments'
+    SINGULARNAME: 'Appointment'
+
+  WWN\Appointments\Extensions\AppointmentListPageExtension:
+    db_EnableAppointmentListExtension: 'Activate appointment lists on site'
+    many_many_AppointmentLists: 'Appointment lists'
+    PLURALNAME: 'Appointment lists'
+    SINGULARNAME: 'Appointment list'

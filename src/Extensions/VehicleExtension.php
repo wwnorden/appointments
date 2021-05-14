@@ -15,7 +15,7 @@ class VehicleExtension extends DataExtension
     /**
      * @var array
      */
-    private static $belongs_many_many = [
+    private static array $belongs_many_many = [
         'Appointment' => Appointment::class,
     ];
 }

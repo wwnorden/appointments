@@ -8,24 +8,34 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\ManyManyList;
 use WWN\Vehicles\Vehicle;
 
 /**
  * Appointment
  *
  * @package wwn-appointments
+ * @property string $Date
+ * @property string $Unity
+ * @property string $Subject
+ * @property string $Location
+ * @property string $Leadership
+ * @property string $Clothing
+ * @property string $CustomVehicleInfo
+ * @method ManyManyList Vehicles()
+ * @method ManyManyList Lists()
  */
 class Appointment extends DataObject
 {
     /**
      * @var string
      */
-    private static $table_name = 'WWNAppointments';
+    private static string $table_name = 'WWNAppointments';
 
     /**
      * @var string[]
      */
-    private static $db = [
+    private static array $db = [
         'Date' => 'DBDatetime',
         'Unity' => 'Varchar(100)',
         'Subject' => 'Varchar(300)',
@@ -38,14 +48,15 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $many_many = [
+    private static array $many_many = [
         'Vehicles' => Vehicle::class,
+        'Lists' => AppointmentList::class,
     ];
 
     /**
      * @var array[]
      */
-    private static $indexes = [
+    private static array $indexes = [
         'SearchFields' => [
             'type' => 'fulltext',
             'columns' => ['Subject', 'Location'],
@@ -55,21 +66,29 @@ class Appointment extends DataObject
     /**
      * @var string[]
      */
-    private static $default_sort = [
-        'Date' => 'DESC',
-        'ID' => 'DESC',
+    private static array $default_sort = [
+        'Date' => 'ASC',
+        'ID' => 'ASC',
     ];
 
     /**
      * @var string[]
      */
-    private static $summary_fields = [
+    private static array $summary_fields = [
         'DateFormatted',
         'Unity',
         'Subject',
         'Location',
         'Leadership',
         'Clothing',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private static array $searchable_fields = [
+        'Subject',
+        'Location',
     ];
 
     /**
@@ -101,14 +120,6 @@ class Appointment extends DataObject
 
         return $this->replaceDay($date->format('l, d.m.Y H:i'));
     }
-
-    /**
-     * @var string[]
-     */
-    private static $searchable_fields = [
-        'Subject',
-        'Location',
-    ];
 
     public function populateDefaults()
     {
@@ -208,16 +219,16 @@ class Appointment extends DataObject
     {
         $fields = parent::getCMSFields();
 
-        $mainOptions = array(
+        $mainOptions = [
             'CustomVehicleInfo' => $this->translateEnum(
                 __CLASS__,
                 'CustomVehicleInfo'
             ),
-        );
+        ];
 
         // Main tab
         $mainFields = [
-            'Date' => $this->configDatetime('Date'),
+            'Date' => $this->configDatetime(),
             'CustomVehicleInfo' => DropdownField::create(
                 'CustomVehicleInfo',
                 _t('WWN\Appointments\Appointment.db_CustomVehicleInfo',
@@ -237,15 +248,14 @@ class Appointment extends DataObject
     }
 
     /**
-     * @param $field
      *
      * @return DatetimeField
      */
-    private function configDatetime($field): DatetimeField
+    private function configDatetime(): DatetimeField
     {
         $dateTimefield = DatetimeField::create(
-            $field,
-            _t('WWN\Appointments\Appointment.db_'.$field, $field)
+            'Date',
+            _t('WWN\Appointments\Appointment.db_'.'Date', 'Date')
         )
             ->setHTML5(false)
             ->setDateTimeFormat(
@@ -275,11 +285,11 @@ class Appointment extends DataObject
      *
      * @return array
      */
-    public function translateEnum($class, $field): array
+    public function translateEnum(string $class, string $field): array
     {
         $enumArr = $this->dbObject($field)->enumValues();
 
-        // Enum Übersetzungen
+        // Enum translations
         $translatedField = [];
         foreach ($enumArr as $key => $value) {
             $translatedField[$key] = _t($class.'.'.$key, $class.'.'.$key);
@@ -288,7 +298,12 @@ class Appointment extends DataObject
         return $translatedField;
     }
 
-    public function CustomVehicleInfoTranslation($CustomVehicleInfo)
+    /**
+     * @param $CustomVehicleInfo
+     *
+     * @return string
+     */
+    public function CustomVehicleInfoTranslation($CustomVehicleInfo): string
     {
         if (empty($CustomVehicleInfo)) {
             return '';
