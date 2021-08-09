@@ -42,7 +42,7 @@ class Appointment extends DataObject
         'Location' => 'Varchar(100)',
         'Leadership' => 'Varchar(100)',
         'Clothing' => 'Varchar(100)',
-        'CustomVehicleInfo' => "Enum('Groupvehicles,Upon need')",
+        'CustomVehicleInfo' => 'Varchar(255)',
     ];
 
     /**
@@ -218,32 +218,10 @@ class Appointment extends DataObject
     public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
-
-        $mainOptions = [
-            'CustomVehicleInfo' => $this->translateEnum(
-                __CLASS__,
-                'CustomVehicleInfo'
-            ),
-        ];
-
-        // Main tab
-        $mainFields = [
-            'Date' => $this->configDatetime(),
-            'CustomVehicleInfo' => DropdownField::create(
-                'CustomVehicleInfo',
-                _t('WWN\Appointments\Appointment.db_CustomVehicleInfo',
-                    'CustomVehicleInfo'),
-                $mainOptions['CustomVehicleInfo']
-            ),
-        ];
-        $fields->addFieldsToTab('Root.Main', $mainFields);
-
         $fields->dataFields()['CustomVehicleInfo']->setDescription(
             _t('WWN\Appointments\Appointment.CustomVehicleInfoDescription',
                 'Select if no vehicles are choosen')
         );
-        $fields->dataFields()['CustomVehicleInfo']->setHasEmptyDefault(true);
-
         return $fields;
     }
 
