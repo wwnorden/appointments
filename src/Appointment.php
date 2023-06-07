@@ -177,6 +177,8 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
+            default:
+                return '';
         }
     }
 
