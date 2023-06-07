@@ -27,14 +27,8 @@ use WWN\Vehicles\Vehicle;
  */
 class Appointment extends DataObject
 {
-    /**
-     * @var string
-     */
     private static string $table_name = 'WWNAppointments';
 
-    /**
-     * @var string[]
-     */
     private static array $db = [
         'Date' => 'DBDatetime',
         'Unity' => 'Varchar(100)',
@@ -45,17 +39,11 @@ class Appointment extends DataObject
         'CustomVehicleInfo' => 'Varchar(255)',
     ];
 
-    /**
-     * @var string[]
-     */
     private static array $many_many = [
         'Vehicles' => Vehicle::class,
         'Lists' => AppointmentList::class,
     ];
 
-    /**
-     * @var array[]
-     */
     private static array $indexes = [
         'SearchFields' => [
             'type' => 'fulltext',
@@ -63,17 +51,11 @@ class Appointment extends DataObject
         ],
     ];
 
-    /**
-     * @var string[]
-     */
     private static array $default_sort = [
         'Date' => 'ASC',
         'ID' => 'ASC',
     ];
 
-    /**
-     * @var string[]
-     */
     private static array $summary_fields = [
         'DateFormatted',
         'Unity',
@@ -83,19 +65,11 @@ class Appointment extends DataObject
         'Clothing',
     ];
 
-    /**
-     * @var string[]
-     */
     private static array $searchable_fields = [
         'Subject',
         'Location',
     ];
 
-    /**
-     * @param bool $includerelations
-     *
-     * @return array
-     */
     public function fieldLabels($includerelations = true): array
     {
         $labels = parent::fieldLabels(true);
@@ -107,8 +81,6 @@ class Appointment extends DataObject
 
     /**
      * format date
-     *
-     * @return false|string
      */
     public function getDateFormatted(): ?string
     {
@@ -121,7 +93,7 @@ class Appointment extends DataObject
         return $this->replaceDay($date->format('l, d.m.Y H:i'));
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         parent::populateDefaults();
         $this->Date = date('d.m.Y h:m');
@@ -138,15 +110,11 @@ class Appointment extends DataObject
 
     /**
      * translate weekdays
-     *
-     * @param string
-     *
-     * @return string|string[]
      */
     private function replaceDay($date): string
     {
         switch ($date) {
-            case strpos($date, 'Monday'):
+            case str_contains($date, 'Monday'):
                 return str_replace(
                     'Monday',
                     _t(
@@ -155,7 +123,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Tuesday'):
+            case str_contains($date, 'Tuesday'):
                 return str_replace(
                     'Tuesday',
                     _t(
@@ -164,7 +132,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Wednesday'):
+            case str_contains($date, 'Wednesday'):
                 return str_replace(
                     'Wednesday',
                     _t(
@@ -173,7 +141,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Thursday'):
+            case str_contains($date, 'Thursday'):
                 return str_replace(
                     'Thursday',
                     _t(
@@ -182,7 +150,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Friday'):
+            case str_contains($date, 'Friday'):
                 return str_replace(
                     'Friday',
                     _t(
@@ -191,7 +159,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Saturday'):
+            case str_contains($date, 'Saturday'):
                 return str_replace(
                     'Saturday',
                     _t(
@@ -200,7 +168,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Sunday'):
+            case str_contains($date, 'Sunday'):
                 return str_replace(
                     'Sunday',
                     _t(
@@ -209,31 +177,26 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
+            default:
+                return '';
         }
     }
 
-    /**
-     * @return FieldList $fields
-     */
     public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
         $fields->dataFields()['CustomVehicleInfo']->setDescription(
             _t('WWN\Appointments\Appointment.CustomVehicleInfoDescription',
-                'Select if no vehicles are choosen')
+                'Select if no vehicles are chosen')
         );
         return $fields;
     }
 
-    /**
-     *
-     * @return DatetimeField
-     */
     private function configDatetime(): DatetimeField
     {
-        $dateTimefield = DatetimeField::create(
+        $dateTimeField = DatetimeField::create(
             'Date',
-            _t('WWN\Appointments\Appointment.db_'.'Date', 'Date')
+            _t('WWN\Appointments\Appointment.db_' . 'Date', 'Date')
         )
             ->setHTML5(false)
             ->setDateTimeFormat(
@@ -242,27 +205,21 @@ class Appointment extends DataObject
                     'MM/dd/yyyy HH:mm'
                 )
             );
-        $dateTimefield->setDescription(
+        $dateTimeField->setDescription(
             _t(
                 'WWN\Appointments\Appointment.DateTimeDescription',
                 'e.g. {format}',
-                ['format' => $dateTimefield->getDateTimeFormat()]
+                ['format' => $dateTimeField->getDateTimeFormat()]
             )
         );
-        $dateTimefield->setAttribute(
+        $dateTimeField->setAttribute(
             'placeholder',
-            $dateTimefield->getDateTimeFormat()
+            $dateTimeField->getDateTimeFormat()
         );
 
-        return $dateTimefield;
+        return $dateTimeField;
     }
 
-    /**
-     * @param string $class
-     * @param string $field
-     *
-     * @return array
-     */
     public function translateEnum(string $class, string $field): array
     {
         $enumArr = $this->dbObject($field)->enumValues();
@@ -270,23 +227,18 @@ class Appointment extends DataObject
         // Enum translations
         $translatedField = [];
         foreach ($enumArr as $key => $value) {
-            $translatedField[$key] = _t($class.'.'.$key, $class.'.'.$key);
+            $translatedField[$key] = _t($class . '.' . $key, $class . '.' . $key);
         }
 
         return $translatedField;
     }
 
-    /**
-     * @param $CustomVehicleInfo
-     *
-     * @return string
-     */
     public function CustomVehicleInfoTranslation($CustomVehicleInfo): string
     {
         if (empty($CustomVehicleInfo)) {
             return '';
         } else {
-            return _t('WWN\Appointments\Appointment.'.$CustomVehicleInfo,
+            return _t('WWN\Appointments\Appointment.' . $CustomVehicleInfo,
                 $CustomVehicleInfo);
         }
     }
