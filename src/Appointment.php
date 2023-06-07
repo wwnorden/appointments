@@ -146,7 +146,7 @@ class Appointment extends DataObject
     private function replaceDay($date): string
     {
         switch ($date) {
-            case strpos($date, 'Monday'):
+            case str_contains($date, 'Monday'):
                 return str_replace(
                     'Monday',
                     _t(
@@ -155,7 +155,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Tuesday'):
+            case str_contains($date, 'Tuesday'):
                 return str_replace(
                     'Tuesday',
                     _t(
@@ -164,7 +164,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Wednesday'):
+            case str_contains($date, 'Wednesday'):
                 return str_replace(
                     'Wednesday',
                     _t(
@@ -173,7 +173,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Thursday'):
+            case str_contains($date, 'Thursday'):
                 return str_replace(
                     'Thursday',
                     _t(
@@ -182,7 +182,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Friday'):
+            case str_contains($date, 'Friday'):
                 return str_replace(
                     'Friday',
                     _t(
@@ -191,7 +191,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Saturday'):
+            case str_contains($date, 'Saturday'):
                 return str_replace(
                     'Saturday',
                     _t(
@@ -200,7 +200,7 @@ class Appointment extends DataObject
                     ),
                     $date
                 );
-            case strpos($date, 'Sunday'):
+            case str_contains($date, 'Sunday'):
                 return str_replace(
                     'Sunday',
                     _t(
